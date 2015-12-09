@@ -2,6 +2,7 @@ var AppDispatcher = require('../AppDispatcher');
 var { EventEmitter } = require('events');
 var { ActionTypes } = require('../Constants');
 var assign = require('react/lib/Object.assign');
+var ViewActionCreators = require('../actions/ViewActionCreators');
 
 var events = new EventEmitter();
 var CHANGE_EVENT = 'CHANGE';
@@ -38,6 +39,13 @@ ContactsStore.dispatchToken = AppDispatcher.register((payload) => {
       loaded: true,
       contacts: action.contacts
     });
+  }
+
+  if (action.type === ActionTypes.CONTACT_DELETED) {
+    var newContacts = state.contacts.filter(
+      (contact) => { return action.contact.id !== contact.id; }
+    );
+    setState({ contacts: newContacts });
   }
 });
 

@@ -20,9 +20,13 @@ var App = React.createClass({
     this.setState(ContactsStore.getState());
   },
 
+  deleteContact (contact) {
+    ViewActionCreators.deleteContact(contact);
+  },
+
   renderContacts () {
     return this.state.contacts.map((contact) => {
-      return <li>{contact.first} {contact.last}</li>;
+      return <li onClick={this.deleteContact.bind(this, contact)}>{contact.first} {contact.last}</li>;
     });
   },
 

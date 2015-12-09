@@ -21,9 +21,17 @@ var DATA = {
   ]
 };
 
+var mexican = () => DATA.items.filter((item) => item.type === 'mexican' );
+
 var Menu = React.createClass({
   render () {
-    return null;
+    var mexican_food_names = mexican().sort(sortBy('name')).map((food) => <li>{food.name}</li>);
+    return (
+      <div>
+        <h1>{DATA.title}</h1>
+        <ul>{mexican_food_names}</ul>
+      </div>
+    );
   }
 });
 
